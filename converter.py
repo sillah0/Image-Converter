@@ -87,6 +87,25 @@ def convert_to_format(file, output_format):
     return img_io.getvalue(), file.filename
 
 @app.route('/', methods=['GET', 'POST'])
+"""
+Handles file uploads and converts images to a specified format.
+
+This route accepts both GET and POST requests. On a GET request, it renders an HTML template for file upload.
+On a POST request, it processes the uploaded files, converts them to the specified output format, and returns
+a ZIP file containing the converted images.
+
+Returns:
+    str: A message prompting the user to upload at least one valid image file if no valid files are provided.
+    Response: A Flask response object containing the ZIP file with the converted images for download.
+
+Raises:
+    Exception: If there is an error during the image conversion process.
+
+Note:
+    - Supported image formats for conversion are: .jpg, .jpeg, .png, .bmp, .tif, .tiff, .gif, .raw.
+    - The output format is specified by the user through a form field named 'output_format'.
+    - The converted images are added to an in-memory ZIP file and sent as a downloadable response.
+"""
 def upload_file():
     if request.method == 'POST':
         files = request.files.getlist('files')
